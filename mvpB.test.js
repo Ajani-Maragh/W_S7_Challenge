@@ -15,6 +15,24 @@ describe('Sprint 7 Challenge Learner Tests', () => {
     [5] sum('10', '3') // returns 13
   */
 
+    describe('Unit Testing of sum function', () => {
+      test('sum() throws an error "pass valid numbers"', () => {
+        expect(() =>sum()).toThrow('pass valid numbers')
+      })
+      test('sum(2, "seven") throws an error "pass valid numbers"', () => {
+        expect(() => sum(2, 'seven')).toThrow('pass valid numbers')
+      })
+      test('sum(1, 3) returns 4', () => {
+        expect(sum(1, 3)).toBe(4)
+      })
+      test('sum("1", 2) returns 3', () => {
+        expect(sum('1', 2)).toBe(3)
+      })
+      test('sum("10", "3") returns 13', () => {
+        expect(sum("10", "3")).toBe(13)
+      })
+    })
+
   /*
   👉 TASK 2 - Integration Testing of HelloWorld component at the bottom of this module
 
@@ -29,10 +47,36 @@ describe('Sprint 7 Challenge Learner Tests', () => {
     [5] renders a text that reads "JavaScript is pretty awesome"
     [6] renders a text that includes "javaScript is pretty" (use exact = false)
   */
-  test('you can comment out this test', () => {
-    expect(true).toBe(false)
+
+describe('Integration Testing of HelloWorld component', () => {
+  beforeEach(() => {
+    render(<HelloWorld />)
+  })
+  test('renders a link that reads "Home"', () => {
+    expect(screen.queryByText('Home')).toBeInTheDocument()
+  })
+  test('renders a link that reads "About"', () => {
+    expect(screen.queryByText('About')).toBeInTheDocument()
+  })
+  test('renders a link that reads "Blog"', () => {
+    expect(screen.queryByText('Blog')).toBeInTheDocument()
+  })
+  test('renders a text that reads "The Truth"', () => {
+    expect(screen.queryByText("The Truth")).toBeInTheDocument()
+  })
+  test('renders a text that reads "JavaScript is pretty awesome"', () => {
+    expect(screen.queryByText("JavaScript is pretty awesome")).toBeInTheDocument()
+  })
+  test('renders a text that includes "JavaScript is pretty" (use exact = false)', () => {
+    expect(screen.queryByText(/JavaScript is pretty/i,)).toBeInTheDocument()
   })
 })
+
+
+// test('you can comment out this test', () => {
+//   expect(true).toBe(false)
+// })
+ 
 
 function sum(a, b) {
   a = Number(a)
